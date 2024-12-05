@@ -34,3 +34,14 @@ Different classification algorithms were tested out with regularization and Logi
 3) The outputs from feature engineering, classification pipeline and accuracy metrics will be shown in Dataproc.
 4) The script also saves the pipeline model in your GCP bucket.
 5) Run the Load_model.py with your new unlabeled dataset as job-2 to label them.
+# Anomaly Detection
+The second part of the project is an extension to the first pipeline which will be used to detect anomalies in the data. An anomaly in event logs refers to any deviation from the normal or expected patterns of behaviour recorded in the logs. These anomalies can signify unusual activity, system malfunctions, or even security threats, depending on the context. Detecting anomalies is crucial for maintaining system reliability, security, and performance.
+	Detecting anomalies early is important to prevent CPU crashed, Hardware deadlocks, Security Risks and Device overload. An anomaly in android logs can be calculated based on the datetime timestamp and indexes. Therefore, a count of each level is required.
+# Feature Engineering
+The count of each levels within a particular time frame, rolling_mean and rolling_sttdev is calculated for the last 6 rows.
+An amnomaly is set to 1 if the count is greated than rollin_mean + 0.5 * rolling_sttdev. 
+# Classification
+A random forest classifies is used to classify each tuple whether they have an anomaly or not
+# How to run the detection file?
+1) Submit a job-3 on dataproc with Anomaly_Detection.py as the main and the 6 android_log files as the argument.
+2) The features and the output of the model will be displayed as the output.
