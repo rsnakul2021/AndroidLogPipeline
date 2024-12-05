@@ -24,7 +24,13 @@ The component column contains 1 or 2 word brief description of the log. A tokeni
  
 Finally, an N-Gram UDF is used to created a paid of 2-words grams. An N-gram is a contiguous sequence of N items (words, characters, or tokens) from a given text or speech. It is commonly used in natural language processing (NLP) and text analysis.
  
-The output of the above steps created new columns that are shown below:
- 
 The dataset that we now have contain the following columns: date, time, pid, tid, component, content, content_tokens, content_cleaned, content_ngram, key_value_map. These will be used feature engineering pipeline that is based on a TF-IDF algorithm to convert the words into meaningful numbers. A numerical metric called TF-IDF (Term Frequency-Inverse Document Frequency) is used in natural language processing to assess a word's significance to a document within a corpus, or group of documents. It strikes a balance between a word's rarity throughout the corpus (IDF) and its frequency in a single document (TF). This approach is useful for finding pertinent phrases while weeding out common, less instructive ones since words that are widespread in a document but uncommon throughout the corpus have higher TF-IDF scores.
 	Then a String Indexer is used to convert the categories into numbers. StringIndexer is a feature transformer in PySpark that converts categorical text labels into numerical indices, assigning unique integers to each distinct label based on their frequency. This is commonly used for preparing categorical features for machine learning algorithms.
+# Classification
+Different classification algorithms were tested out with regularization and Logistic Regression came out to be the best in terms of accuracy and F1 score.
+# How to run the files?
+1) Import the 6 datasets along with the 3 code files onto your GCP bucket.
+2) Submit job-1 with Level_classification.py as main file and the 6 android log files as arguments.
+3) The outputs from feature engineering, classification pipeline and accuracy metrics will be shown in Dataproc.
+4) The script also saves the pipeline model in your GCP bucket.
+5) Run the Load_model.py with your new unlabeled dataset as job-2 to label them.
